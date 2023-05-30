@@ -1,0 +1,38 @@
+﻿<Window x:Class="ДЗ_по_WPF_до_15._04._23.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ДЗ_по_WPF_до_15._04._23"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="320" Width="640">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <WrapPanel Grid.Column="0" Grid.ColumnSpan="2">
+            <Button Margin ="2" Background="#FFDDDDDD" Foreground="Navy">Navy</Button>
+            <Button Margin ="2" Background="#FFDDDDDD" Foreground="Blue">Blue</Button>
+            <Button Margin ="2" Background="#FFDDDDDD" Foreground="Aqua">Aqua</Button>
+            <Button Margin ="2" Background="#FFDDDDDD" Foreground="Teal">Teal</Button>
+            <Button Margin ="2" Background="#FFDDDDDD" Foreground="Olive">Olive</Button>
+            <Button Margin ="2" Background="#FFDDDDDD" Foreground="Green">Green</Button>
+            <Button Margin ="2" Background="#FFDDDDDD" Foreground="Lime">Lime</Button>
+            <Button Margin ="2" Background="#FFDDDDDD" Foreground="Yellow">Yellow</Button>
+            <Button Margin ="2" Background="#FFDDDDDD" Foreground="Orange">Orange</Button>
+            <Button Margin ="2" Background="#FFDDDDDD" Foreground="Red">Red</Button>
+            <Button Margin ="2" Background="#FFDDDDDD" Foreground="Maroon">Maroon</Button>
+            <Button Margin ="2" Background="#FFDDDDDD" Foreground="Magenta">Fuchia</Button>
+            <Button Margin ="2" Background="#FFDDDDDD" Foreground="Purple">Purple</Button>
+            <Button Margin ="2" Background="#FFDDDDDD" Foreground="Black">Black</Button>
+            <Button Margin ="2" Background="#FFDDDDDD" Foreground="Silver">Silver</Button>
+            <Button Margin ="2" Background="#FFDDDDDD" Foreground="Gray">Gray</Button>
+            <Button Margin ="2" Background="#FFDDDDDD" Foreground="White">White</Button>
+
+        </WrapPanel>
+
+
+    </Grid>
+</Window>
