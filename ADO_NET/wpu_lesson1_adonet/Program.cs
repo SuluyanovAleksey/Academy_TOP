@@ -11,21 +11,20 @@ namespace wpu221_lesson1_adonet
         SqlConnection? conn = null;
         SqlDataReader? rdr = null;
         public Program()
-        {            
+        {
             conn = new SqlConnection("Data Source=WINDOWS10\\SQLEXPRESS;Initial Catalog=Library;Integrated Security=True;");
         }
         static void Main(string[] args)
         {
             Program program = new Program();
-            program.InsertBook();            
-
+            program.StoredProcedure();
             program.InsertQuery();
-            
         }
 
         public void InsertQuery()
         {
-            try {
+            try
+            {
                 conn.Open();
 
 #if INSERT_TO_AUTHORS
@@ -68,26 +67,28 @@ namespace wpu221_lesson1_adonet
                 Console.WriteLine();
 #endif
             }
-            finally { 
+            finally
+            {
                 if (rdr != null) rdr.Close();
-                if(conn != null) conn.Close();
+                if (conn != null) conn.Close();
             }
         }
-        public void InsertAuthor() {
+        public void InsertAuthor()
+        {
 
             Console.WriteLine("Введите Имя автора:");
             string? FirstName = Console.ReadLine();
             Console.WriteLine("Введите Фамилию автора:");
-            string? LastName = Console.ReadLine();            
+            string? LastName = Console.ReadLine();
 
             try
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand();  
+                SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conn;
                 cmd.CommandText = "insert into Authors (FirstName, LastName) values (@FirstName,@LastName)";
-                cmd.Parameters.Add("@FirstName",SqlDbType.NVarChar).Value = FirstName;
-                cmd.Parameters.Add("@LastName",SqlDbType.NVarChar).Value = LastName;
+                cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = FirstName;
+                cmd.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = LastName;
                 cmd.ExecuteNonQuery();
             }
             finally
@@ -118,14 +119,15 @@ namespace wpu221_lesson1_adonet
                 cmd.Parameters.AddWithValue("@FirstName", FirstName);
                 cmd.Parameters.AddWithValue("@LastName", LastName);
                 rdr = cmd.ExecuteReader();
-                if (!rdr.HasRows) {
+                if (!rdr.HasRows)
+                {
                     conn.Close();
                     conn.Open();
                     cmd.CommandText =
                         @"insert into Authors (FirstName, LastName) values (@FirstName, @LastName);";
                     cmd.ExecuteNonQuery();
                 }
-                
+
             }
             finally
             {
@@ -139,7 +141,7 @@ namespace wpu221_lesson1_adonet
                 cmd.Connection = conn;
                 cmd.CommandText = "INSERT INTO Books (AuthorId, Title, PRICE, PAGES) SELECT A.Id, @Title, @PRICE, @PAGES FROM Authors AS A WHERE FirstName = @FirstName AND LastName = @LastName";
                 cmd.Parameters.AddWithValue("@FirstName", FirstName);
-                cmd.Parameters.AddWithValue("@LastName",LastName);
+                cmd.Parameters.AddWithValue("@LastName", LastName);
                 cmd.Parameters.AddWithValue("@Title", Title);
                 cmd.Parameters.AddWithValue("@Price", Price);
                 cmd.Parameters.AddWithValue("@Pages", Pages);
@@ -151,8 +153,24 @@ namespace wpu221_lesson1_adonet
                 if (conn != null) conn.Close();
             }
         }
+        public void StoredProcedure()
+        {
+            int authorId = Convert.ToInt32(Console.ReadLine());
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("getBooksNumber", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
 
+            cmd.Parameters.AddWithValue("@AuthorId", authorId);
 
+            SqlParameter outputParam = new SqlParameter("@BookCount", SqlDbType.Int);
+            outputParam.Direction = ParameterDirection.Output;
+
+            cmd.Parameters.Add(outputParam);
+
+            cmd.ExecuteNonQuery();
+            Console.WriteLine(cmd.Parameters["@BookCount"].Value.ToString());
+
+        }
     }
 }
 
