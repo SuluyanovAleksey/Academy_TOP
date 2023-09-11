@@ -1,0 +1,43 @@
+﻿<Window x:Class="wpu_lesson2_adonet.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wpu_lesson2_adonet"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBox x:Name="textBox" Grid.Row="0"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>                                
+            </Grid.RowDefinitions>
+
+            <Button x:Name="executeButton" Content="Execute" Grid.ColumnSpan="2" Click="executeButton_Click"/>
+
+            <Button x:Name="fillAuthorsButton" Content="Fill Authors" Grid.Column="0" Grid.Row="1" Click="fillAuthorsButton_Click"/>
+            <Button Name="updateAuthorsButton" Content="Update Authors" Grid.Column="0" Grid.Row="2" Click="updateAuthorsButton_Click"/>            
+
+            <Button x:Name="fillBooksButton" Content="Fill Books" Grid.Column="1" Grid.Row="1" Click="fillBooksButton_Click"/>
+            <Button Name="updateBooksButton" Content="Update Books" Grid.Column="1" Grid.Row="2" Click="updateBooksButton_Click"/>            
+            
+        </Grid>
+
+        <DataGrid x:Name="dataGrid" Grid.Row="2"/>
+
+    </Grid>
+</Window>
